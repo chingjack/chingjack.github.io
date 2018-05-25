@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dog Parks in Brooklyn</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+    var parks = new Array(15);
+    parks[0] = {
+      name: "McCarren Park Dog Run",
+      lat: 40.720081,
+      long: -73.952888
+    }
+    parks[1] = {
+      name: "Cooper Park Dog Run",
+      lat: 40.715355,
+      long: -73.935928
+    }
+    parks[2] = {
+      name: "Brooklyn Bridge Park Dog Run",
+      lat: 40.703988,
+      long: -73.988515
+    }
+    parks[3] = {
+      name: "East River State Dog Park Run",
+      lat: 40.721496,
+      long: -73.960910
+    }
+    parks[4] = {
+      name: "McGrowl-Lick Park Dog Run",
+      lat: 40.723258,
+      long: -73.943617
+    }
+    parks[5] = {
+      name: "JJ Byrne Dog Park",
+      lat: 40.672944,
+      long: -73.985789
+    }
+    parks[6] = {
+      name: "Pier 6 Dog Run",
+      lat: 40.692717,
+      long: -74.000040
+    }
+    parks[7] = {
+      name: "Sternberg Park",
+      lat: 40.706120,
+      long: -73.947225
+    }
+    parks[8] = {
+      name: "Forest Park Dog Run",
+      lat: 40.696683,
+      long: -73.860469
+    }
+    parks[9] = {
+      name: "South Slope Dog Run",
+      lat: 40.660948,
+      long: -73.988055
+    }
+    parks[10] = {
+      name: "Rodney Street BQE Dog Run",
+      lat: 40.712504,
+      long: -73.954078
+    }
+    parks[11] = {
+      name: "Mount Prospect Park",
+      lat: 40.671618,
+      long: -73.966718
+    }
+    parks[12] = {
+      name: "Owl’s Head Park Dog Run",
+      lat: 40.639973,
+      long: -74.035196
+    }
+    parks[13] = {
+      name: "Leif Ericson Park",
+      lat: 40.637381,
+      long: -74.023050
+    }
+    parks[14] = {
+      name: "Dyker Beach Dog Run",
+      lat: 40.617958,
+      long: -74.020826
+    }
+
+    var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 40.6459295, lng: -74.0094753},
+          zoom: 12
+        });
+        var infowindows = new Array(parks.length)
+        var markers = new Array(parks.length)
+        for(let i = 0; i < parks.length; i++) {
+          infowindows[i] = new google.maps.InfoWindow({
+            content: parks[i].name
+          });
+          markers[i] = new google.maps.Marker({
+            position: {lat: parks[i].lat, lng: parks[i].long},
+            map: map,
+            title: parks[i].name
+          });
+          markers[i].addListener('mouseover',function() {
+            infowindows[i].open(map, markers[i]);
+          })
+          markers[i].addListener('mouseout', function() {
+            infowindows[i].close(map, markers[i]);
+          })
+        }
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZMTUbwhSFjhTpWijDQI1rIhkkqzcmc2Y&callback=initMap"
+    async defer></script>
+  </body>
+</html>

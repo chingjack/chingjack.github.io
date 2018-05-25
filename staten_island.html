@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dog Parks in Staten Island</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var parks = new Array(6);
+      parks[0] = {
+        name: "Silver Lake Dog Run",
+        lat: 40.626348,
+        long: -74.092797
+      }
+      parks[1] = {
+        name: "Bloomingdale Park",
+        lat: 40.533205,
+        long: -74.210413
+      }
+      parks[2] = {
+        name: "Wolfe’s Pond Park",
+        lat: 40.522730,
+        long: -74.193699
+      }
+      parks[3] = {
+        name: "Crescent Beach Park",
+        lat: 40.536206,
+        long: -74.145795
+      }
+      parks[4] = {
+        name: "Von Briesen Park",
+        lat: 40.607606,
+        long: -74.059572
+      }
+      parks[5] = {
+        name: "Willowbrook Park",
+        lat: 40.600350,
+        long: -74.158199
+      }
+
+
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 40.5647149, lng: -74.2168583},
+          zoom: 12
+        });
+        var infowindows = new Array(parks.length)
+        var markers = new Array(parks.length)
+        for(let i = 0; i < parks.length; i++) {
+          infowindows[i] = new google.maps.InfoWindow({
+            content: parks[i].name
+          });
+          markers[i] = new google.maps.Marker({
+            position: {lat: parks[i].lat, lng: parks[i].long},
+            map: map,
+            title: parks[i].name
+          });
+          markers[i].addListener('mouseover',function() {
+            infowindows[i].open(map, markers[i]);
+          })
+          markers[i].addListener('mouseout', function() {
+            infowindows[i].close(map, markers[i]);
+          })
+        }
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZMTUbwhSFjhTpWijDQI1rIhkkqzcmc2Y&callback=initMap"
+    async defer></script>
+  </body>
+</html>

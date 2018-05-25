@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dog Parks in Bronx</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var parks = new Array(17);
+      parks[0] = {
+        name: "St Marys Dog Park",
+        lat: 40.809622,
+        long: -73.912118
+      }
+      parks[1] = {
+        name: "Franz Sigel Park",
+        lat: 40.823099,
+        long: -73.925326
+      }
+      parks[2] = {
+        name: "Crotona Park Ampitheatre",
+        lat: 40.837375,
+        long: -73.895103
+      }
+      parks[3] = {
+        name: "Tremont Park",
+        lat: 40.845250,
+        long: -73.895231
+      }
+      parks[4] = {
+        name: "Henry Hudson Park",
+        lat: 40.880886,
+        long: -73.920179
+      }
+      parks[5] = {
+        name: "Riverdale Park",
+        lat: 40.884096,
+        long: -73.919720
+      }
+      parks[6] = {
+        name: "Seton Park",
+        lat: 40.885935,
+        long: -73.916510
+      }
+      parks[7] = {
+        name: "Ewen Park Dog Run",
+        lat: 40.882278,
+        long: -73.910033
+      }
+      parks[8] = {
+        name: "Fort Independence Playground",
+        lat: 40.881641,
+        long: -73.896116
+      }
+      parks[9] = {
+        name: "Friends of Van Cortlandt Park",
+        lat: 40.885360,
+        long: -73.890140
+      }
+      parks[10] = {
+        name: "Dog Bone Park",
+        lat: 40.883739,
+        long: -73.882909
+      }
+      parks[11] = {
+        name: "Williamsbridge Oval",
+        lat: 40.877910,
+        long: -73.877558
+      }
+      parks[12] = {
+        name: "Hackett Park",
+        lat: 40.901468,
+        long: -73.905651
+      }
+      parks[13] = {
+        name: "Canine Court",
+        lat: 40.898870,
+        long: -73.895282
+      }
+      parks[14] = {
+        name: "Van Cortlandt Park",
+        lat: 40.897932,
+        long: -73.885953
+      }
+      parks[15] = {
+        name: "Oneida Run",
+        lat: 40.899357,
+        long: -73.872318
+      }
+      parks[16] = {
+        name: "Pelham Bay Park",
+        lat: 40.850564,
+        long: -73.821028
+      }
+
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 40.8517687, lng: -73.9109737},
+          zoom: 12
+        });
+        var infowindows = new Array(parks.length)
+        var markers = new Array(parks.length)
+        for(let i = 0; i < parks.length; i++) {
+          infowindows[i] = new google.maps.InfoWindow({
+            content: parks[i].name
+          });
+          markers[i] = new google.maps.Marker({
+            position: {lat: parks[i].lat, lng: parks[i].long},
+            map: map,
+            title: parks[i].name
+          });
+          markers[i].addListener('mouseover',function() {
+            infowindows[i].open(map, markers[i]);
+          })
+          markers[i].addListener('mouseout', function() {
+            infowindows[i].close(map, markers[i]);
+          })
+        }
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZMTUbwhSFjhTpWijDQI1rIhkkqzcmc2Y&callback=initMap"
+    async defer></script>
+  </body>
+</html>

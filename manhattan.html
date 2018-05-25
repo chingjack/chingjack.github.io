@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dog Parks in Manhattan</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var parks = new Array(28);
+      parks[0] = {
+        name: "Homer’s Run",
+        lat: 40.871131,
+        long: -73.921661
+      }
+      parks[1] = {
+        name: "Fort Tryon Park",
+        lat: 40.862554,
+        long: -73.931297
+      }
+      parks[2] = {
+        name: "Sir William’s Dog Run",
+        lat: 40.861616,
+        long: -73.931993
+      }
+      parks[3] = {
+        name: "Highbridge park Dog Run",
+        lat: 40.855983,
+        long: -73.925029
+      }
+      parks[4] = {
+        name: "J Hood Wright Park Dog Run",
+        lat: 40.846541,
+        long: -73.942128
+      }
+      parks[5] = {
+        name: "Dog Park",
+        lat: 40.840996,
+        long: -73.945113
+      }
+      parks[6] = {
+        name: "Dog Runs at Riverside Park",
+        lat: 40.801931,
+        long: -73.971358
+      }
+      parks[7] = {
+        name: "De Witt Clinton Dog Park",
+        lat: 40.768390,
+        long: -73.994431
+      }
+      parks[8] = {
+        name: "Chelsea Waterside Dog Park",
+        lat: 40.748867,
+        long: -74.007536
+      }
+      parks[9] = {
+        name: "West Village D.O.G. Run",
+        lat: 40.740738,
+        long: -74.008460
+      }
+      parks[10] = {
+        name: "Leroy Street Dog Park",
+        lat: 40.730385,
+        long: -74.010960
+      }
+      parks[11] = {
+        name: "First Runner Dog Park",
+        lat: 40.726452,
+        long: -73.981116
+      }
+      parks[12] = {
+        name: "Madison Square Dog Park",
+        lat: 40.742294,
+        long: -73.988595
+      }
+      parks[13] = {
+        name: "Andrew Haswell Green Dog Park",
+        lat: 40.760208,
+        long: -73.956878
+      }
+      parks[14] = {
+        name: "Tribeca Dog Run",
+        lat: 40.721572,
+        long: -74.012443
+      }
+      parks[15] = {
+        name: "Soho Grand Dog Park",
+        lat: 40.722143,
+        long: -74.004627
+      }
+      parks[16] = {
+        name: "Sirius Dog Run",
+        lat: 40.712021,
+        long: -74.017012
+      }
+      parks[17] = {
+        name: 'Dog Park East River Esplanade South',
+        lat: 40.704648,
+        long: -74.005051
+      }
+      parks[18] = {
+        name: 'Fish Bridge Park Dog Run',
+        lat: 40.709275,
+        long: -74.001578
+      }
+      parks[19] = {
+        name: 'Corlears Hook Park',
+        lat: 40.711695,
+        long: -73.979697
+      }
+      parks[20] = {
+        name: 'Tompkins Square Dog Run',
+        lat: 40.726514,
+        long: -73.981155
+      }
+      parks[21] = {
+        name: 'Robert Kovary Run for Small Dogs',
+        lat: 40.730191,
+        long: -73.997575
+      }
+      parks[22] = {
+        name: "Union Square Dog Run",
+        lat: 40.735601,
+        long: -73.990969
+      }
+      parks[23] = {
+        name: "Stuyvesant Square Park",
+        lat: 40.733945,
+        long: -73.984104
+      }
+      parks[24] = {
+        name: "West 72nd Street Dog Run",
+        lat: 40.781276,
+        long: -73.9865
+      }
+      parks[25] = {
+        name: "Peter Detmold Park",
+        lat: 40.753120,
+        long: -73.964097
+      }
+      parks[26] = {
+        name: "Carl Schurz Park",
+        lat: 40.775124,
+        long: -73.943705
+      }
+      parks[27] = {
+        name: "Parks Dog Run",
+        lat: 40.704421,
+        long: -74.005616
+      }
+
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 40.7831, lng: -73.9712},
+          zoom: 12
+        });
+        var infowindows = new Array(parks.length)
+        var markers = new Array(parks.length)
+        for(let i = 0; i < parks.length; i++) {
+          infowindows[i] = new google.maps.InfoWindow({
+            content: parks[i].name
+          });
+          markers[i] = new google.maps.Marker({
+            position: {lat: parks[i].lat, lng: parks[i].long},
+            map: map,
+            title: parks[i].name
+          });
+          markers[i].addListener('mouseover',function() {
+            infowindows[i].open(map, markers[i]);
+          })
+          markers[i].addListener('mouseout', function() {
+            infowindows[i].close(map, markers[i]);
+          })
+        }
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZMTUbwhSFjhTpWijDQI1rIhkkqzcmc2Y&callback=initMap"
+    async defer></script>
+  </body>
+</html>

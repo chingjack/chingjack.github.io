@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dog Parks in Queens</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var parks = new Array(21);
+      parks[0] = {
+        name: "Forest Park Dog Run",
+        lat: 40.6967255,
+        long: -73.8626463
+      }
+      parks[1] = {
+        name: "Underbridge Dog Run",
+        lat: 40.7338194,
+        long: -73.8473113
+      }
+      parks[2] = {
+        name: "Lou Lodati",
+        lat: 40.7472871,
+        long: -73.9239705
+      }
+      parks[3] = {
+        name: "Cunningham Park Dog Run",
+        lat: 40.7259895,
+        long: -73.7776317
+      }
+      parks[4] = {
+        name: "Sherry Park",
+        lat: 40.741478,
+        long: -73.898779
+      }
+      parks[5] = {
+        name: "Overlook Dog Park",
+        lat: 40.710702,
+        long: -73.835549
+      }
+      parks[6] = {
+        name: "Little Bay Dog Run",
+        lat: 40.787842,
+        long: -73.792723
+      }
+      parks[7] = {
+        name: "Freeway Dog Run",
+        lat: 40.590847,
+        long: -73.808387
+      }
+      parks[8] = {
+        name: "Doughboy Park",
+        lat: 40.746516,
+        long: -73.908940
+      }
+      parks[9] = {
+        name: "Hunters Point South Waterfront Park Dog Run",
+        lat: 40.743235,
+        long: -73.960102
+      }
+      parks[10] = {
+        name: "Little Bay Park Dog Run",
+        lat: 40.787850,
+        long: -73.792745
+      }
+      parks[11] = {
+        name: "Travers Park",
+        lat: 40.753849,
+        long: -73.889269
+      }
+      parks[12] = {
+        name: "LIC Dog Park",
+        lat: 40.743847,
+        long: -73.953492
+      }
+      parks[13] = {
+        name: "JH Crew DoG Park",
+        lat: 40.750980,
+        long: -73.896801
+      }
+      parks[14] = {
+        name: "Yellowstone Park",
+        lat: 40.726364,
+        long: -73.847599
+      }
+      parks[15] = {
+        name: "Ralph Demarco Park",
+        lat: 40.784056,
+        long: -73.917479
+      }
+      parks[16] = {
+        name: "John F. Murray Playground",
+        lat:40.747145,
+        long: -73.948617
+      }
+      parks[17] = {
+        name: "Rainey Park",
+        lat: 40.766043,
+        long: -73.940624
+      }
+      parks[18] = {
+        name: "Throgs Neck Dog Park",
+        lat: 40.787970,
+        long: -73.792777
+      }
+      parks[19] = {
+        name: "Lawrence Triangle Dog Park",
+        lat: 40.755805,
+        long: -73.815714
+      }
+      parks[20] = {
+        name: "Glen Oaks Village Enchanted FOrest Dog Park",
+        lat: 40.752634,
+        long: -73.720371
+      }
+
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 40.7282, lng: -73.7949},
+          zoom: 12
+        });
+        var infowindows = new Array(parks.length)
+        var markers = new Array(parks.length)
+        for(let i = 0; i < parks.length; i++) {
+          infowindows[i] = new google.maps.InfoWindow({
+            content: parks[i].name
+          });
+          markers[i] = new google.maps.Marker({
+            position: {lat: parks[i].lat, lng: parks[i].long},
+            map: map,
+            title: parks[i].name
+          });
+          markers[i].addListener('mouseover',function() {
+            infowindows[i].open(map, markers[i]);
+          })
+          markers[i].addListener('mouseout', function() {
+            infowindows[i].close(map, markers[i]);
+          })
+        }
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZMTUbwhSFjhTpWijDQI1rIhkkqzcmc2Y&callback=initMap"
+    async defer></script>
+  </body>
+</html>
